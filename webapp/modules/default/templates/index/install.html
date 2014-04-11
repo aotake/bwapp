@@ -1,0 +1,49 @@
+<{**
+ * Default Install Template
+ *                                                                                                      
+ * Smarty3                                                                                              
+ *                                                                                                      
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)                       
+ *                                                                                                      
+ *  Licensed under The MIT License                                                                      
+ *  Redistributions of files must retain the above copyright notice.                                    
+ *                                                                                                      
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)        
+ * @link          http://bmath.jp Bmath Web Application Platform Project                                
+ * @package       Ao.modules.default.templates                                                          
+ * @since                                                                                               
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html                      
+ *}>                                                                                                    
+<h2><{$sysconf.module}>モジュールインストール</h2>
+
+<{if $installed}>
+
+<div id="error" style="color: #00f; padding: 10px;">
+テーブルは作成済みです
+</div>
+
+<p>
+    <a href="<{$siteconf.root_url}>/">サイトトップへ</a>
+    <a href="<{$siteconf.root_url}>/<{if $sysconf.module != "default"}><{$sysconf.module}>/<{/if}>">モジュールトップへ</a>
+</p>
+
+<{else}>
+
+<{if $error}>
+<div id="error" style="color: #f00; padding: 10px;">
+<{$error}>
+</div>
+<{/if}>
+
+
+<form name="installForm" action="<{$action_name}>" method="post">
+以下のテーブルを作成します
+<ul>
+    <{foreach from=$install_tables item=item}>
+    <li><{$item}></li>
+    <{/foreach}>
+</ul>
+<input type="submit" name="submit" value="作成" />
+</form>
+
+<{/if}>

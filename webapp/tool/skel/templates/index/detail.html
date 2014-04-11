@@ -1,0 +1,22 @@
+<h2><{$module}></h2>
+
+<div style="text-align: right;">
+    <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>">一覧へ</a>
+</div>
+
+<h3 class="moduleSubtitle">詳細</h3>
+<div class="moduleContent"}>
+    <dl>
+<{--foreach from=$tableInfo item=item--}>
+        <dt><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></dt>
+        <dd><{$item->get("<{--$item.COLUMN_NAME--}>")}></dd>
+
+<{--/foreach--}>
+    </dl>
+</div>
+<div class="moduleInfo">
+    作成日：<{$item->get("created")|date_format:"%Y年%m月%d日"}>
+    更新日：<{$item->get("modified")|date_format:"%Y年%m月%d日"}>
+</div>
+
+

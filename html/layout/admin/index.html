@@ -1,0 +1,126 @@
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="<{$siteconf.keywords}>">
+<meta name="description" content="<{$siteconf.description}>">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" type="text/css" media="screen,print" href="<{$layout_url}>/style.css">
+<{if $modcss_exists}>
+<link type="text/css" href="<{$siteconf.root_url}>/loadcss/?m=<{$sysconf.module}>" rel="stylesheet" />
+<{/if}>
+<link rel="stylesheet" type="text/css" media="screen,print" href="<{$siteconf.root_url}>/js/css/smoothness/jquery-ui-1.8.6.custom.css">
+<link type="text/css" rel="stylesheet" href="<{$siteconf.root_url}>/js/fancybox/jquery.fancybox-1.3.4.css" />
+<title><{$siteconf.default_title}>：管理ページ</title>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript">
+$(function(){
+    <{*-- Ao_Controller_Action::initSmarty() で module,controller,action の各名前を埋めている -- *}>
+    $("li#<{$sysconf.module}>-<{$sysconf.controller}> a").addClass("current");
+    $("li#<{$sysconf.module}>-parent a").addClass("current");
+    $("a.fancy").fancybox({
+        'transitionIn': 'none',
+        'transitionOut': 'none',
+        'titlePosition': 'over',
+        'titleFormat': function(title, currentArray, currentIndex, currentOpts) {
+            return '<span id="fancybox-title-over">Image '  + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+        }
+    });
+});
+</script>
+<{$embed_tags}>
+<{if $sysconf.admin_ckeditor}>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+CKEDITOR.config.toolbar = [
+['Source', 'Cut','Copy','Paste','PasteText']
+,['Undo','Redo','-','SelectAll','RemoveFormat']
+,['Bold','Italic','Underline','Strike','-','Subscript','Superscript']
+,['NumberedList','BulletedList','-','Outdent','Indent']
+,['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']
+,['Link','Unlink']
+,['Image','Table','HorizontalRule','SpecialChar']
+//,'/'
+,['Format','FontSize']
+,['TextColor','BGColor']
+,['ShowBlocks']
+];
+CKEDITOR.config.width = '600px';
+CKEDITOR.config.height = '200px';
+</script>
+<{/if}>
+</head>
+<body>
+
+<div id="layout">
+
+    <div id="page_header">
+        <div id="top_navi">
+            <a href="<{$siteconf.root_url}>/admin/">■ ホーム</a>
+            <{if $role != "guest"}>
+                <{if $role == "admin"}>
+            | <a href="<{$siteconf.root_url}>/">サイト確認</a>
+                <{/if}>
+            | <a href="<{$siteconf.root_url}>/logon/logout/">ログアウト</a>（<{$user_name}>さん）
+            <{else}>
+            | <a href="<{$siteconf.root_url}>/logon/">ログイン</a>
+            <{/if}>
+            <{if $ssl}>| SSL通信中<{/if}>
+        </div>
+        <h1 id="header_title"><a href="<{$siteconf.root_url}>/admin/"><{$siteconf.default_title}> 管理ページ</a></h1>
+        <h2 id="header_subtitle"><{$siteconf.default_sub_title}></h2>
+    </div>
+    <div id="page_navbar">
+        <ul id="nav2">
+        <{if $siteconf.menu.admin}>
+            <{foreach from=$siteconf.menu.admin key=menu_module item=item}>
+            <{foreach from=$item key=menu_controller item=menu}>
+            <{if $menu_module == "owa"}><{* -- モジュール名が owa なら label のみ利用 -- *}>
+            <li><a href="<{$siteconf.root_url}>/owa/">■ <{$menu.label}></a></li>
+            <{else}>
+                <{if $siteconf.submenu.admin[$sysconf.module]}><{* -- サブメニューがある時はモジュール名で current クラスがセットされるようにする -- *}>
+            <li id="<{$menu_module}>-parent"><a href="<{$siteconf.root_url}>/<{$menu_module}>/<{$menu_controller}>/">■ <{$menu.label}></a></li>
+                <{else}>                                       <{* -- サブメニューが無い時はモジュール名+コントローラ名で current クラスがセットされるようにする -- *}>
+            <li id="<{$menu_module}>-<{$menu_controller}>"><a href="<{$siteconf.root_url}>/<{$menu_module}>/<{$menu_controller}>/">■ <{$menu.label}></a></li>
+                <{/if}>
+            <{/if}>
+            <{/foreach}>
+            <{/foreach}>
+        <{else}>
+            <li id="admin-index"><a href="<{$siteconf.root_url}>/admin/">■管理トップ</a></li>
+            <li id="admin-user"><a href="<{$siteconf.root_url}>/admin/user/">■ユーザ管理</a></li>
+            <li id="admin-role"><a href="<{$siteconf.root_url}>/admin/role/">■ロール管理</a></li>
+            <li id="admin-group"><a href="<{$siteconf.root_url}>/admin/group/">■グループ管理</a></li>
+            <li id="admin-modperm"><a href="<{$siteconf.root_url}>/admin/modperm/">■モジュール権限管理</a></li>
+        <{/if}>
+        </ul>
+    </div>
+
+    <{if $siteconf.submenu.admin[$sysconf.module]}>
+    <div id="page_navbar" style="border-top: 1px dotted #666; background-color: #eef;">
+        <ul id="nav2" style="margin: 8px 0;">
+            <{foreach from=$siteconf.submenu.admin[$sysconf.module] key=submenu_controller item=item}>
+            <li id="<{$sysconf.module}>-<{$submenu_controller}>"><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$submenu_controller}>/" style="font-size: 90%">■ <{$item.label}></a></li>
+            <{/foreach}>
+        </ul>
+    </div>
+    <{/if}>
+
+<div id="sys_message"></div>
+<div id="contents">
+<{$contents}>
+
+<div style="clear: both;"></div>
+</div>
+
+    <div id="page_footer">
+        <{$siteconf.copyright}>
+    </div>
+
+</div>
+</body>
+</html>

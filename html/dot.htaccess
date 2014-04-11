@@ -1,0 +1,27 @@
+# live
+#SetEnv APPLICATION_ENV production
+# dev
+#SetEnv APPLICATION_ENV development
+# local
+SetEnv APPLICATION_ENV debug
+
+#AuthUserFile /home/aotake/web/dev/bodiak/html/.htpasswd
+#AuthUserFile /Users/aotake/work/osrc/html/.htpasswd
+#AuthGroupFile /dev/null
+#AuthName "Enter your ID and password"
+#AuthType Basic
+#require valid-user
+ 
+<Files ~ "^.(htpasswd|htaccess)$">
+    deny from all
+</Files>
+<Files ~ "^dot.htaccess$">
+    deny from all
+</Files>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]

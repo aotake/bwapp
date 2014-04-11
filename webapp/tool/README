@@ -1,0 +1,13 @@
+dbconf.php
+    以下のソースをSmarty を使って生成するスクリプト
+    Form
+    Validator
+    Manager
+func.sh
+    shell ベースの toPascal 関数
+manager.sh
+    dbconf.php を使って Manager ソースを生成する
+skel
+    スケルトンファイル
+skel.sh
+    Vo, Model, Form, Validator を生成する

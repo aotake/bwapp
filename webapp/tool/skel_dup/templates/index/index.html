@@ -1,0 +1,33 @@
+<h2>一覧表示</h2>
+
+<div id="searchBox">
+    <form name="searchForm" id="searchForm" action="<{$action_name}>" method="get">
+    <input type="text" id="kw" name="kw" value="<{$kw}>" />
+    <input type="submit" name="submit" id="submit" value="検索" />
+    </form>
+</div>
+
+<div class="pager"> <{$pagenav}> </div>
+<{if $items}>
+<table class="listTable">
+<tr>
+    <{--foreach from=$tableInfo item=item--}>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <{--/foreach--}>
+</tr>
+<{foreach from=$items item=item}>
+<tr>
+    <{--foreach from=$tableInfo item=item--}>
+    <{--if $item.COLUMN_NAME == "id"--}>
+    <td><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/detail/?id=<{$item->get("id")}>"><{$item->get("id")}></a></td>
+    <{--else--}>
+    <td><{$item->get("<{--$item.COLUMN_NAME--}>")}></td>
+    <{--/if--}>
+    <{--/foreach--}>
+</tr>
+<{/foreach}>
+</table>
+<{else}>
+<p> 新着情報はありません </p>
+<{/if}>
+<div class="pager"> <{$pagenav}> </div>

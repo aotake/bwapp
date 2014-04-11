@@ -1,0 +1,13 @@
+# このファイルについて：
+# サイト内で利用するモジュール、レイアウトの一覧です
+#
+# 書式：
+# "タイプ, GIT リポジトリ, clone のディレクトリ名"の書式で記述します
+#
+layout, /var/git/bmathlog_layout/mylayout,  mylayout
+module, /var/git/bmathlog_module/contact,   mail
+module, /var/git/bmathlog_module/facebook,  facebook
+module, /var/git/bmathlog_module/news,      news
+module, /var/git/bmathlog_module/mydefault, mydefault
+module, /var/git/bmathlog_module/entryform, seminar
+module, /var/git/bmathlog_module/tabi,      report

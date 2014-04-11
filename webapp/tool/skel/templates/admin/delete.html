@@ -1,0 +1,29 @@
+<div class="contentTtl"><h2><{$module}></h2></div>
+<div id="warning">
+    こちらの情報を削除しようとしています
+</div>
+
+<h3 class="moduleSubtitle"><span style="color: red;">削除確認</span></h3>
+<div class="moduleContent"}>
+
+<table class="adminTable">
+<{--foreach from=$tableInfo item=item--}>
+<tr>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <td><{$item->get("<{--$item.COLUMN_NAME--}>")}></td>
+</tr>
+<{--/foreach--}>
+</table>
+
+</div>
+<div class="moduleInfo">
+    作成日：<{$item->get("created")|date_format:"%Y年%m月%d日"}>
+    更新日：<{$item->get("modified")|date_format:"%Y年%m月%d日"}>
+</div>
+
+
+<form name="deleteForm" id="deleteForm" action="<{$action_name}>" method="post" onSubmit="return confirm('本当に削除しますか？');">
+    <input type="hidden" name="id" value="<{$smarty.request.id}>" />
+    <input type="submit" name="submit" value="この情報を削除する" />
+</form>
+

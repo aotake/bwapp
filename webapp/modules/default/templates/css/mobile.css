@@ -1,0 +1,137 @@
+body {
+    margin: 0px;
+    font: 100% " Osaka", "ＭＳ Ｐゴシック";
+    background: #f5f5f7;
+    margin: 0; 
+    padding: 0;
+    text-align: center; 
+    color: #333333;
+    font-size:12px;
+    line-height:130%;
+}
+
+
+#layout{
+    margin : 0 auto  ;
+    width: 100%;
+    background:#FFFFFF;
+    border: 1px solid #666666;
+    text-align: left;
+    }
+
+img { vertical-align:bottom; border:none; }
+
+/* ヘッダー ------------------------------------------------------------------------ */
+
+#page_header {
+    height: 60px;
+    padding: 10px;
+    background: #000088;
+    color: #ffffff;
+}
+
+#page_navbar{
+    border: 1px solid #ddddff;
+    background: #ccffdd;
+}
+
+
+h1{
+    margin: 0; 
+    padding: 5px 5px; 
+    font-size:16px;
+    color: #ffffff;
+}
+
+h2{
+    margin: 0px;
+    border-bottom:1px solid #000088;
+    border-left:10px solid #000088;
+    padding-left: 5px;
+    background: #ddddff;
+}
+h2#header_subtitle{
+    padding: 5px;
+    font-size: 100%;
+    background: #000088;
+}
+
+
+
+
+#page_footer {
+    border-top: 1px dotted #666666;
+    padding: 10px;
+    text-align: center;
+    background: #000088;
+    color: #ffffff;
+    font-size: 80%;
+}
+
+#header_image{
+}
+#header_title{
+    margin: 0px;
+    font-family:Osaka, "ＭＳ Ｐゴシック";
+}
+#header_title a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#contents{
+    padding: 5px;
+}
+
+
+
+/* see: http://f32.aaa.livedoor.jp/~azusa/index.php?t=css&p=navigation */
+ul#nav2, ul#nav2 * {
+    font:bold 14px Verdana,sans-serif;
+}
+ul#nav2 {
+    list-style:none;
+    margin:1em 0; padding:0;
+}
+ul#nav2 li {
+    display:inline;
+    text-align:center;
+    padding:0 0 0 .5em;
+}
+ul#nav2 a:hover, ul#nav2 a#current {
+    color:#8ea084;
+    border-bottom:3px solid #ffaaaa;
+    text-decoration:none;
+}
+ul#nav2 a {
+    color:#848684; font-weight:bold;
+    border-bottom:3px solid #aaaaaa;
+    text-decoration:none;
+}
+
+#special_pickup, #search_area{
+    clear: both;
+    border: 1px solid #000000;
+    width: 740px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+.sp_item{
+    float: left;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 140px;;
+    height: 150px;;
+}
+
+/* 文字色・サイズ ------------------------------------------------------------------ */
+
+
+p { margin:10px 3px; line-height:150%; color: #333333; font-size:14px; line-height:130%;}
+
+.gry12 { font-size:12px; color:#333333; line-height:130%; }
+.gry14 { font-size:14px; color:#333333; line-height:130%; }
+
+.pink12 { font-size:12px; color:#FF3399; line-height:130%; }

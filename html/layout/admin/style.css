@@ -1,0 +1,244 @@
+/* あどみんボディ ---------------------------------------------------------------------- */
+body {
+    margin: 0px;
+    font: 100% " Osaka", "ＭＳ Ｐゴシック";
+    background: #f5f5f7;
+    margin: 0; 
+    padding: 0;
+    text-align: center; 
+    color: #333333;
+    font-size:12px;
+    line-height:130%;
+}
+
+
+#layout{
+    margin : 0 auto  ;
+    width: 800px;
+    background:#FFFFFF;
+    border: 1px solid #666666;
+    text-align: left;
+    }
+
+img { vertical-align:bottom; border:none; }
+
+/* ヘッダー ------------------------------------------------------------------------ */
+
+#page_header {
+    height: 80px;
+    padding: 10px;
+    background: #008800;
+    color: #ffffff;
+}
+
+#page_navbar{
+    border: 1px solid #ccddff;
+    background: #ccddff;
+}
+
+
+h1{
+    margin: 0;
+    padding: 5px 5px;
+    font-size:16px;
+    color: #ffffff;
+}
+
+h2{
+    margin: 10px 0;
+    border-bottom:1px solid #008800;
+    border-left:10px solid #008800;
+    padding: 5px 10px;
+    background: #ddffdd;
+}
+h2#header_subtitle{
+    padding: 5px;
+    font-size: 100%;
+    background: #008800;
+}
+
+h3{
+    margin: 10px 0;
+    border-bottom:1px solid #008800;
+    padding: 2px 10px;
+    background: #fff;
+}
+
+
+#page_footer {
+    border-top: 1px dotted #666666;
+    padding: 10px;
+    text-align: center;
+    background: #008800;
+    color: #ffffff;
+    font-size: 80%;
+}
+
+#header_image{
+}
+#header_title{
+    margin: 0px;
+    font-family:Osaka, "ＭＳ Ｐゴシック";
+}
+#header_title a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#contents{
+    padding: 5px;
+}
+
+
+
+/* see: http://f32.aaa.livedoor.jp/~azusa/index.php?t=css&p=navigation */
+ul#nav2, ul#nav2 * {
+    font:bold 14px Verdana,sans-serif;
+}
+ul#nav2 {
+    list-style:none;
+    margin:1em 0; padding:0;
+}
+ul#nav2 li {
+    display:inline;
+    text-align:center;
+    padding:0 0 0 .5em;
+}
+ul#nav2 a:hover, ul#nav2 a#current, ul#nav2 a.current{
+    color:#008800;
+    border-bottom:3px solid #ffaaaa;
+    text-decoration:none;
+}
+ul#nav2 a {
+    color:#848684; font-weight:bold;
+    border-bottom:3px solid #aaaaaa;
+    text-decoration:none;
+}
+
+/* 文字色・サイズ ------------------------------------------------------------------ */
+
+
+p {
+    padding: 5px 10px;
+    margin:10px 3px;
+    line-height:150%;
+    color: #333333;
+    font-size:14px;
+    line-height:130%;
+    border: 1px solid #f00;
+}
+
+.gry12 { font-size:12px; color:#333333; line-height:130%; }
+.gry14 { font-size:14px; color:#333333; line-height:130%; }
+
+.pink12 { font-size:12px; color:#FF3399; line-height:130%; }
+
+/* 2カラム設定 */
+/* #contents で padding を 5px とっているので 10px ぶん狭く */
+#sideL {
+    float: left;
+    width: 550px;
+    padding: 0 5px;
+}
+#sideR {
+    float: right;
+    padding: 0 5px;
+    width: 220px;
+}
+/* TOP: ニュース */
+h2.blockTitle {
+    margin: 10px;
+    border-bottom:1px solid #000088;
+    border-left:10px solid #000088;
+    padding: 5px 10px;
+    background: #ddddff;
+}
+
+/* リンク */
+.go_top {
+    padding: 0px 10px;
+    text-align: right;
+    color: #fff;
+}
+.go_top a {
+    color: #fff;
+}
+.go_top a:hover {
+    color: #fff;
+}
+.go_top a:visited {
+    color: #fff;
+}
+
+#top_navi{
+    margin: 0;
+    text-align: right;
+    color: #fff;
+}
+#top_navi a, #top_navi a:visited, #top_navi a:link{
+    color: #fff;
+}
+
+form .error {
+    border-left: 2px solid #f00;
+    padding-left: 5px;
+    margin-left: 15px;
+}
+.form_error{
+    border-left: 2px solid #f00;
+    padding-left: 5px;
+}
+
+.adminTable{
+    width: 100%;
+    border-collapse:collapse;
+}
+.adminTable th{
+    font-weight: bold;
+    background-color: #ddffdd;
+    border-bottom: 1px solid #333;
+    border-left: 1px solid #aaa;
+    padding: 5px;
+}
+.adminTable th.top{
+    border-top: 1px solid #333;
+}
+.adminTable th.rtop{
+    border-top: 1px solid #333;
+    border-right: 1px solid #aaa;
+}
+.adminTable td{
+    border-bottom: 1px solid #333;
+    border-left: 1px solid #aaa;
+    padding: 5px;
+}
+.adminTable td.top{
+    border-top: 1px solid #333;
+}
+.adminTable td.rtop{
+    border-top: 1px solid #333;
+    border-right: 1px solid #aaa;
+}
+.adminTable td.r {
+    border-right: 1px solid #aaa;
+}
+.adminTable .even {
+    background-color: #e0e0e0;
+}
+.adminTable .odd {
+}
+
+dl.list dt {
+  clear: left;
+  float: left;
+  margin: 0 0 0.8em;
+  width: 7.5em;
+  border-left: solid 8px #CCC;
+  padding-left: 5px;
+  color: #000;
+}
+
+dl.list dd {
+  margin-bottom: 0.8em;
+  margin-left: 7.5em;
+}

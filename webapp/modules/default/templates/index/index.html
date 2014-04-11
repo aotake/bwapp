@@ -1,0 +1,81 @@
+<{**
+ * Default Index Template
+ *                                                                                                      
+ * Smarty3                                                                                              
+ *                                                                                                      
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)                       
+ *                                                                                                      
+ *  Licensed under The MIT License                                                                      
+ *  Redistributions of files must retain the above copyright notice.                                    
+ *                                                                                                      
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)        
+ * @link          http://bmath.jp Bmath Web Application Platform Project                                
+ * @package       Ao.modules.default.templates                                                          
+ * @since                                                                                               
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html                      
+ *}>                                                                                                    
+<div id="sideL">
+
+<h2 class="blockTitle">ようこそ <{$siteconf.default_title}>へ</h2>
+
+<div class="item">
+    <p>
+        Bmath Web Application Platform Project (BWAPP) はホームページを作るプラットフォームの開発と、
+        その上で動く基本的なモジュールを提供します。
+        また、サイト固有の独自モジュールの開発をサポートするツール群も提供しています。
+        データベースを使わないサイト構築ツールとしてもご利用頂けます。
+    </p>
+    <p>
+        開発フレームワークは Zend Framework を、テンプレートエンジンには Smarty を採用しています。
+    </p>
+    <p>
+        想定するユーザは PHP, HTML, CSS, データベースの知識があり、ある程度サイト構築の経験がある方で
+        複数のサイトを構築するニーズをお持ちの方です。
+    </p>
+</div>
+
+<h2 class="blockTitle">このページのカスタマイズについて</h2>
+<div class="item">
+    <p>
+        このページは webapp/modules/default/templates/index/index.html を読み込んでいます。
+    </p>
+    <p>
+        カスタマイズする場合は webapp/modules/default/templates_custom というフォルダを作成し
+        そこに編集した index/index.html を保存してください。
+    </p>
+</div>
+
+</div>
+
+<div id="sideR">
+
+<h2>新着：お知らせ</h2>
+<div class="item">
+<{if $informations}>
+
+    <{*
+      * ここに information モジュールの新着などを掲載する
+      *
+      * 以下は例
+      *}>
+
+    <ul>
+    <{foreach from=$informations item=item}>
+    <li>
+        <a href="<{$siteconf.root_url}>/information/index/detail/?id=<{$item->get("id")}>"><{$item->get("title")}></a>
+    </li>
+    <{/foreach}>
+    </ul>
+
+<{else}>
+現在新着情報はありません。
+<{/if}>
+</div>
+
+<{*----- sample
+<div class="item">
+      右側エリアにバナー画像をまとめても良いかも知れない
+</div>
+
+--------*}>
+</div>

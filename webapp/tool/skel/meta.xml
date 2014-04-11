@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<meta>
+<meta_explanation>
+    <explanation>
+<![CDATA[
+テーブル・レシピ作成用メタファイル
+説明：
+■ モジュールの説明
+calendar という名称のモジュールを作る例です。
+適宜書き換えて下さい。
+サンプルは、日付、イベント日、場所の３カラムを管理しています。
+sphinx ドキュメントは meta_explanation の中に sphinx_page 要素を追加して下さい。
+]]>
+    </explanation>
+</meta_explanation>
+<module>
+    <name>album</name>
+</module>
+<db>
+    <type>mysql</type>
+    <version>5.x</version>
+    <charset>utf8</charset>
+    <engine>InnoDB</engine>
+</db>
+<table>
+    <name>calendar</name>
+    <note>イベントカレンダー管理</note>
+    <def><![CDATA[
+#----------+--------------+--------+--------+--------+--------------+--------------+-----------------+-------+--------------
+# colname  | data type    |is null | key    | default| extra        | label        | option          | form  | attribute
+#----------+--------------+--------+--------+--------+--------------+--------------+-----------------+-------+--------------
+id,          int,          not null, primary,        ,auto_increment, 主キー
+uid,         int,          not null,        ,        ,              , ユーザID
+cal_date,    int,          not null,        ,        ,              , イベント日
+title,       varchar(255), not null,        ,        ,              , イベント名
+place,       varchar(255),         ,        ,       0,              , イベント会場
+address,     varchar(255),         ,        ,        ,              , 住所
+access,      varchar(255),         ,        ,        ,              , 交通
+tel,         varchar(16),          ,        ,        ,              , 連絡先電話番号
+url,         text,                 ,        ,        ,              , URL,                           ,  text, size=70
+is_open,     tinyint(1),   not null,        ,       0,              , 公開フラグ,     1=はい|0=いいえ, radio, sep=br
+note,        text,                 ,        ,        ,              , 備考
+created,     timestamp,            ,        ,        ,              , 登録日
+modified,    timestamp,            ,        ,        ,              , 最終更新日
+delete_flag, int,                  ,        ,        ,              , 削除フラグ
+]]>
+    </def>
+</table>
+<recipe><![CDATA[
+calendar all
+]]>
+</recipe>
+</meta>

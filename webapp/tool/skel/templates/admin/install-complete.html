@@ -1,0 +1,19 @@
+<h2><{$sysconf.module}>モジュールインストール</h2>
+
+<{if $error}>
+<div id="error" style="color: #f00; padding: 10px;">
+<{$error}>
+</div>
+<{/if}>
+
+<div id="error" style="color: #f00; padding: 10px;">
+<{$msg}>
+</div>
+
+<{if $error == ""}>
+<p>
+    <a href="<{$siteconf.root_url}>/">サイトトップへ</a>
+    <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/">モジュールトップへ</a>
+    <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/admin/">モジュール管理へ</a>
+</p>
+<{/if}>

@@ -1,0 +1,73 @@
+<{**
+ * Admin Modperm List Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+
+<div class="contentTtl"><h2>一覧</h2></div>
+
+<div style="text-align: right">
+    <li><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/new/">新規記事を投稿</a></li>
+</div>
+
+<div class="pager"><{$pagenav}></div>
+
+<div id="searchBox">
+    <form name="searchForm" id="searchForm" action="<{$action_name}>" method="get">
+    <input type="text" id="kw" name="kw" value="<{$kw}>" />
+    <input type="submit" name="submit" id="submit" value="検索" />
+    </form>
+</div>
+
+<table class="adminTable">
+<tr>
+        <th class="top">主キー</th>
+        <th class="top">ユーザID</th>
+        <th class="top">モジュールディレクトリ名</th>
+        <th class="top">権限レベル</th>
+        <th class="top">備考</th>
+        <th class="top">登録日</th>
+        <th class="top">最終更新日</th>
+        <th class="top">削除フラグ</th>
+        <th class="rtop">操作</th>
+</tr>
+<{foreach from=$items item=item}>
+<tr>
+        <td><{$item->get("id")}></td>
+        <td><{$item->get("uid")}></td>
+        <td><{$item->get("dirname")}></td>
+        <td><{$item->get("permission")}></td>
+        <td><{$item->get("note")}></td>
+        <td><{$item->get("created")}></td>
+        <td><{$item->get("modified")}></td>
+        <td><{$item->get("delete_flag")}></td>
+        <td class="r">
+        <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/detail/?id=<{$item->get("id")}>" target="_blank">表示</a>
+        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/edit/?id=<{$item->get("id")}>">編集</a>
+        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/delete/?id=<{$item->get("id")}>">削除</a>
+    </td>
+</tr>
+<{/foreach}>
+</table>
+<div class="pager"><{$pagenav}></div>

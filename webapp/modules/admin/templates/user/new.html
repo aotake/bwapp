@@ -1,0 +1,72 @@
+<{**
+ * Admin User new regist form Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+<h2>ユーザ登録</h2>
+
+<{if $sys_message}>
+<div class="error"><{$sys_message}></div>
+<{/if}>
+<form name="newForm" action="<{$action_name}>" method="post">
+<dl class="list">
+    <dt>ユーザ名</dt>
+    <dd>
+        <{$form.name}>
+        <{if $error.name.required}><div class="error">必須項目です</div><{/if}>
+        <{if $error.name.registed}><div class="error">利用できません</div><{/if}>
+    </dd>
+
+<{if !$sysconf.email_login}>
+    <dt>ログイン名</dt>
+    <dd>
+        <{$form.login}>
+        <{if $error.login.required}><div class="error">必須項目です</div><{/if}>
+        <{if $error.login.length}><div class="error"><{$error.login.length}></div><{/if}>
+        <{if $error.login.format}><div class="error"><{$error.login.format}></div><{/if}>
+        <{if $error.login.registed}><div class="error"><{$error.login.registed}></div><{/if}>
+    </dd>
+<{/if}>
+    <dt>パスワード</dt>
+    <dd>
+        <{$form.passwd}>
+        <{if $error.passwd.required}><div class="error">必須項目です</div><{/if}>
+        <{if $error.passwd.length}><div class="error"><{$error.passwd.length}></div><{/if}>
+        <{if $error.passwd.format}><div class="error"><{$error.passwd.format}></div><{/if}>
+    </dd>
+
+    <dt>メールアドレス</dt>
+    <dd>
+        <{$form.email}>
+        <{if $error.email.required}><div class="error">必須項目です</div><{/if}>
+        <{if $error.email.format}><div class="error">書式が不正です</div><{/if}>
+    </dd>
+
+    <dt>備考</dt>
+    <dd><{$form.note}></dd>
+
+</dl>
+
+<input type="submit" name="submit" value="登録" />
+</form>

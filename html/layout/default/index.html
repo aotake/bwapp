@@ -1,0 +1,119 @@
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="<{$siteconf.keywords}>">
+<meta name="description" content="<{$siteconf.description}>">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" type="text/css" media="screen,print" href="<{$layout_url}>/style.css">
+<link type="text/css" rel="stylesheet" href="<{$siteconf.root_url}>/js/css/smoothness/jquery-ui-1.8.6.custom.css" />
+<link type="text/css" rel="stylesheet" href="<{$siteconf.root_url}>/js/fancybox/jquery.fancybox-1.3.4.css" />
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/jquery-cookie/jquery.cookie.js"></script>
+<title>
+    <{if $thismod.module.title}><{$thismod.module.title}><{else}><{$siteconf.default_title}><{/if}>
+    <{if $thismod.module.subtitle}>
+        ：<{$thismod.module.subtitle}>
+    <{elseif $this.module.title == ""}>
+        <{$siteconf.default_sub_title}>
+    <{/if}>
+</title>
+<script type="text/javascript">
+$(function(){
+    <{*-- Ao_Controller_Action::initSmarty() で module,controller,action の各名前を埋めている -- *}>
+    $("li#<{$sysconf.module}>-<{$sysconf.controller}> a").addClass("current");
+
+    // 言語設定
+    // 変更されたら cookie にセットし直してリロードする
+    $("#select_lang").change(function(){
+        $.cookie("select_lang", $("#select_lang").val(), {path: '<{$root_url_info.path|default:"/"}>'});
+        location.reload();
+    });
+});
+</script>
+<{$embed_tags}>
+<script type="text/javascript" src="<{$siteconf.root_url}>/js/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+
+<div id="layout">
+
+    <div id="page_header">
+        <div id="top_navi">
+            <a href="<{$siteconf.root_url}>/"><{$smarty.const._LAYOUT_LBL_HOME}></a>
+            <{if $role != "guest" && $role != null}>
+                <{if $role == "admin"}>
+            | <a href="<{$siteconf.root_url}>/admin/"><{$smarty.const._LAYOUT_LBL_ADMIN}></a>
+                <{/if}>
+            | <a href="<{$siteconf.root_url}>/logon/logout/"><{$smarty.const._LAYOUT_LBL_LOGOUT}></a>（<{$user_name|string_format:$smarty.const._LAYOUT_LBL_USERNAME}>）
+            <{else}>
+            | <a href="<{$siteconf.root_url}>/logon/"><{$smarty.const._LAYOUT_LBL_LOGIN}></a>（<{$smarty.const._LAYOUT_LBL_GUEST}>）
+            <{/if}>
+            | <{$smarty.const._LAYOUT_LBL_SELECT_LANG}>
+            <select id="select_lang">
+                <option value="ja" <{if $smarty.cookies.select_lang == "ja" || $smarty.cookies.select_lang == ""}>selected='selected'<{/if}>><{$smarty.const._LAYOUT_LBL_SELECT_JA}></option>
+                <option value="en" <{if $smarty.cookies.select_lang == "en"}>selected='selected'<{/if}>><{$smarty.const._LAYOUT_LBL_SELECT_EN}></option>
+            </select>
+            <{if $ssl}>| <{$smarty.const._LAYOUT_LBL_ON_SSL}><{/if}>
+        </div>
+        <h1 id="header_title">
+            <a href="<{$siteconf.root_url}><{if $thismod.module.top_url}>/<{$sysconf.module}><{/if}>/"><{if $thismod.module.title}><{$thismod.module.title}><{else}><{$siteconf.default_title}><{/if}></a>
+        </h1>
+        <h2 id="header_subtitle">
+            <{if $thismod.module.subtitle}>：<{$thismod.module.subtitle}>
+            <{elseif $this.module.title == ""}><{$siteconf.default_sub_title}>
+            <{/if}>
+        </h2>
+    </div>
+
+    <div id="page_navbar">
+        <ul id="nav2">
+        <{if $siteconf.menu.default}>
+            <{*
+              * config.ini で menu の設定をしている場合のグローバルナビ
+              *}>
+            <{foreach from=$siteconf.menu.default key=menu_module item=item}>
+            <{foreach from=$item key=menu_controller item=menu}>
+                <{if $menu.is_admin != true || $menu.is_admin && $role == "admin"}>
+            <li id="<{$menu_module}>-<{$menu_controller}>"><a href="<{$siteconf.root_url}><{if $menu_module != "default"}>/<{$menu_module}><{/if}><{if $menu_controller != "index"}>/<{$menu_controller}><{/if}>/"><{if $menu.lang[$smarty.cookies.select_lang].label}><{$menu.lang[$smarty.cookies.select_lang].label}><{else}>■ <{$menu.label}><{/if}></a></li>
+                <{/if}>
+            <{/foreach}>
+            <{/foreach}>
+        <{else}>
+            <{*
+              * config.ini で menu の設定をしていない場合に使うデフォルトのグローバルナビ
+              *}>
+            <li id="default-index"><a href="<{$siteconf.root_url}>/"><{$smarty.const._LAYOUT_NAV_HOME}></a></li>
+            <li id="news-index"><a href="<{$siteconf.root_url}>/news/"><{$smarty.const._LAYOUT_NAV_NEWS}></a></li>
+            <{if $role == "admin"}>
+            <li id="admin-index"><a href="<{$siteconf.root_url}>/admin/"><{$smarty.const._LAYOUT_NAV_ADMIN}></a></li>
+            <{/if}>
+        <{/if}>
+        </ul>
+    </div>
+
+    <div id="sys_message"><{$sys_message}></div>
+    <div id="contents"><{$contents}>
+
+    <{*
+      * 2カラム設定を採用したときに contents エリアの高さが 0 になるのを防ぐためのダミータグ
+      *}>
+        <div style="clear: both;"></div>
+    </div>
+
+    <div id="page_footer">
+    <div class="go_top"><a href="#"><{$smarty.const._LAYOUT_LBL_GO_TOP}></a></div>
+        <{$siteconf.copyright}>
+    </div>
+</div>
+<script type="text/javascript"><!--
+$(function(){
+    $("a.example7").fancybox({"titlePosition" : "inside"});
+});
+// --></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<{**
+ * Admin Index Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+<style type="text/css">
+#sideLL {
+    float:left;
+    width: 270px;
+}
+#sideLR {
+    float:right;
+    width: 270px;
+}
+#sideR p{
+    text-align: right;
+    border: 0px;
+    margin:0;
+    padding:0;
+}
+dt {
+    font-weight: bold;
+    padding-left: 10px;
+    border-bottom: 1px dotted #666;
+}
+dd {
+    margin-bottom: 15px;
+    text-align: right;
+}
+</style>
+<div id="sideL">
+    <div id="sideLL">
+
+    <h2>モジュール管理</h2>
+    <{foreach from=$modconf key=modname item=_item}>
+        <h3><{$modname}></h3>
+        <{if $_item.admin}>
+        <ul>
+        <{foreach from=$_item.admin key=controller item=item}>
+            <{if $item.controller}>
+                <{if $item.chkflag}>
+                    <{if $_item.module[$item.chkflag]}>
+                    <li><a href="<{$siteconf.root_url}>/<{$modname}>/<{$item.controller}>/"><{$item.title}></a></li>
+                    <{/if}>
+                <{else}>
+                    <li><a href="<{$siteconf.root_url}>/<{$modname}>/<{$item.controller}>/"><{$item.title}></a></li>
+                <{/if}>
+            <{else}>
+                <li><a href="<{$siteconf.root_url}>/<{$modname}>/admin/"><{$item.title}></a></li>
+            <{/if}>
+        <{/foreach}>
+        </ul>
+        <{/if}>
+    <{/foreach}>
+
+    </div><!-- /sideLL -->
+
+    <div id="sideLR">
+
+    <h2>Acl conf</h2>
+    <{foreach from=$acl key=role item=item}>
+    <h3><{$role}></h3>
+        <dl>
+        <{foreach from=$item key=mod item=act}>
+            <dt><{$mod}></dt>
+            <dd><{$act}></dd>
+        <{/foreach}>
+        </dl>
+    <{/foreach}>
+
+    <h2>Site conf</h2>
+
+    <dl>
+    <dt>debug</dt>
+    <dd><{if $siteconf.debug}>on<{else}>off<{/if}></dd>
+
+    <dt>maintenance</dt>
+    <dd><{if $siteconf.maintenance.mode}>on<{else}>off<{/if}></dd>
+
+    <{if $siteconf.maintenance.mode}>
+    <dt>allow ip address</dt>
+    <dd><{$siteconf.maintenance.ip|default:"no conf"}></dd>
+
+    <dt>allow non-admin user</dt>
+    <dd><{$siteconf.maintenance.allow_user|default:"no conf"}></dd>
+    <{/if}>
+
+    <dt>default module</dt>
+    <dd><{$siteconf.default_module|default:"default"}></dd>
+
+    <dt>default layout</dt>
+    <dd><{$siteconf.default_layout|default:"no conf"}></dd>
+
+    <dt>logon module</dt>
+    <dd><{$siteconf.logon_module|default:"default"}></dd>
+
+    <dt>error handler module</dt>
+    <dd><{$siteconf.logon_module|default:"default"}></dd>
+
+    </dl>
+
+    </div><!-- /sideLR -->
+
+    <div style="clear: both;"></div>
+</div>
+
+<div id="sideR">
+    <h2>System Info</h2>
+
+    <h3>Apache</h3>
+    <p><{$system.apache}></p>
+
+    <h3>Mysql</h3>
+    <p><{$system.mysql}></p>
+
+    <h3>PHP</h3>
+    <p><{$system.php}></p>
+
+    <h3>ZendFramework</h3>
+    <p>
+    <{$system.zend}>
+    <{***if $system.zend|version_compare:$system.zend_latest:"<"}>
+    (<span style="color:red">latest: <{$system.zend_latest}></span>)
+    <{else}>
+    (update to date)
+    <{/if****}>
+    </p>
+
+    <h3>Bmath Platform </h3>
+    <p><{$system.aflib}></p>
+
+    <h3>Smarty</h3>
+    <p><{$smarty.version}></p>
+
+
+    <h2>変数： _SERVER</h2>
+    <dl>
+    <{foreach from=$env key=k item=item}>
+    <dt><{$k}></dt>
+    <dd><{$item|regex_replace:"/,/":", "}></dd>
+    <{/foreach}>
+    </dl>
+</div>

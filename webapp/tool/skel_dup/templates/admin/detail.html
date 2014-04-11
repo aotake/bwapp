@@ -1,0 +1,23 @@
+<div class="contentTtl"><h2>詳細</h2></div>
+
+<div style="text-align: right;">
+    <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>">一覧へ</a>
+</div>
+
+<div class="moduleContent"}>
+    <table class="adminTable">
+<{--foreach from=$tableInfo item=item--}>
+    <tr class="<{cycle values="odd,even"}>">
+        <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+        <td><{$item->get("<{--$item.COLUMN_NAME--}>")}></td>
+    </tr>
+
+<{--/foreach--}>
+    </table>
+</div>
+<div class="moduleInfo">
+    作成日：<{$item->get("created")|date_format:"%Y年%m月%d日"}>
+    更新日：<{$item->get("modified")|date_format:"%Y年%m月%d日"}>
+</div>
+
+

@@ -1,0 +1,15 @@
+webapp/temporary/templates_c/*.*
+webapp/temporary/cache/*.*
+webapp/uploads/*.*
+webapp/log/*.*
+webapp/config/config.ini
+webapp/modules/*/config/config.ini
+*.swp
+html/.htaccess
+html/.htpasswd
+html/owa/
+
+webapp/tool/.cache
+webapp/tool/.templates_c
+webapp/tool/DbDefinition*
+webapp/tool/.sphinx.php.last

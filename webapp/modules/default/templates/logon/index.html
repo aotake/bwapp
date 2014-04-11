@@ -1,0 +1,53 @@
+<{**
+ * Default Logon Template
+ *                                                                                                      
+ * Smarty3                                                                                              
+ *                                                                                                      
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)                       
+ *                                                                                                      
+ *  Licensed under The MIT License                                                                      
+ *  Redistributions of files must retain the above copyright notice.                                    
+ *                                                                                                      
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)        
+ * @link          http://bmath.jp Bmath Web Application Platform Project                                
+ * @package       Ao.modules.default.templates                                                          
+ * @since                                                                                               
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html                      
+ *}>                                                                                                    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ログイン</title>
+</head>
+<body>
+
+
+<div id="login">
+
+<div style="padding: 0px 0 20px 0; font-size: 150%; font-weight: bold;">
+    <{$siteconf.name}> ログイン画面
+</div>
+
+<form method="post" action="">
+<input type="hidden" name="token" value="<{$token|escape}>" />
+
+<{if $original_path}>
+<input type="hidden" name="original_path" value="<{$original_path|escape}>">
+<{/if}>
+ID: <input type="text" name="username" value="<{$username|default:""}>" size="10">
+PW: <input type="password" name="password" value="" size="10">
+<input type="submit" value="ログイン">
+
+<{if $result_msg}>
+<div style="color:red; margin-top: 10px; font-weight: bold;">
+<{$result_msg}>
+</div>
+<{/if}>
+
+</form>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+<div class="contentTtl"><h2>一覧</h2></div>
+
+<div style="text-align: right">
+    <li><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/new/">新規記事を投稿</a></li>
+</div>
+
+<div class="pager"><{$pagenav}></div>
+
+<div id="searchBox">
+    <form name="searchForm" id="searchForm" action="<{$action_name}>" method="get">
+    <input type="text" id="kw" name="kw" value="<{$kw}>" />
+    <input type="submit" name="submit" id="submit" value="検索" />
+    </form>
+</div>
+
+<table class="adminTable">
+<tr>
+    <{--foreach from=$tableInfo item=item--}>
+    <th class="top"><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <{--/foreach--}>
+    <th class="rtop">操作</th>
+</tr>
+<{foreach from=$items item=item}>
+<tr>
+    <{--foreach from=$tableInfo item=item--}>
+    <td><{$item->get("<{--$item.COLUMN_NAME--}>")}></td>
+    <{--/foreach--}>
+    <td class="r">
+        <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/detail/?id=<{$item->get("id")}>" target="_blank">表示</a>
+        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/edit/?id=<{$item->get("id")}>">編集</a>
+        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/delete/?id=<{$item->get("id")}>">削除</a>
+    </td>
+</tr>
+<{/foreach}>
+</table>
+<div class="pager"><{$pagenav}></div>

@@ -1,0 +1,26 @@
+<div class="contentTtl"><h2><{$module}></h2></div>
+
+<h3 class="moduleSubtitle"><span style="color: red;">削除完了</span></h3>
+削除が完了しました。
+
+<!-- {{{ delete info
+<div class="moduleContent"}>
+
+<table class="adminTable">
+<{--foreach from=$tableInfo item=item--}>
+<tr>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <td><{$item->get("<{--$item.COLUMN_NAME--}>")}></td>
+</tr>
+<{--/foreach--}>
+</table>
+
+</div>
+<div class="moduleInfo">
+    作成日：<{$item->get("created")|date_format:"%Y年%m月%d日"}>
+    更新日：<{$item->get("modified")|date_format:"%Y年%m月%d日"}>
+</div>
+}}} -->
+
+
+<a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/">管理トップへ戻る</a>

@@ -1,0 +1,16 @@
+<h2><{$sysconf.module}>モジュールTOP</h2>
+
+<p>
+
+<dl>
+<dt>この画面のレイアウトファイル</dt>
+<dd><{$siteconf.root_path}>/layout/<{$layout_name}>/index.html</dd>
+<dt>この画面のレイアウトCSS</dt>
+<dd><{$siteconf.root_path}>/layout/<{$layout_name}>/style.css</dd>
+<dt>この画面のコントローラファイル</dt>
+<dd><{$siteconf.root_path|dirname}>/webapp/modules/<{$sysconf.module}>/controller/<{$sysconf.controller}>Controller.php</dd>
+<dt>この画面のコンテンツファイル</dt>
+<dd><{$siteconf.root_path|dirname}>/webapp/modules/<{$sysconf.module}>/templates/<{$sysconf.controller}>/<{$sysconf.action}>.html</dd>
+</dl>
+
+</p>

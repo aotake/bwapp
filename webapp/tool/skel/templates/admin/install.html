@@ -1,0 +1,27 @@
+<h2><{$sysconf.module}>モジュールインストール</h2>
+
+<{if $error}>
+<div id="error" style="color: #f00; padding: 10px;">
+<{$error}>
+</div>
+<{/if}>
+
+<{if $installed}>
+
+<div id="error" style="color: #00f; padding: 10px;">
+テーブルは作成済みです
+</div>
+
+<p>
+    <a href="<{$siteconf.root_url}>/">サイトトップへ</a>
+    <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/">モジュールトップへ</a>
+</p>
+
+<{else}>
+
+<form name="installForm" action="<{$action_name}>" method="post">
+テーブルを作成します
+<input type="submit" name="submit" value="作成" />
+</form>
+
+<{/if}>

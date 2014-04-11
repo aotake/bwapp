@@ -1,0 +1,23 @@
+<style type="text/css">
+#notice {
+    margin: 10px 0;
+    color: red;
+}
+</style>
+<div class="contentTtl"><h2>編集完了</h2></div>
+
+<div id="notice">
+    編集を受け付けました
+</div>
+
+<!-- {{{ edit data 
+<table class="adminTable">
+<{--foreach from=$tableInfo item=item--}>
+<tr>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th><td><{$params.<{--$item.COLUMN_NAME--}>}></td>
+</tr>
+<{--/foreach--}>
+</table>
+}}} -->
+
+<a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/">モジュール管理トップへ</a>

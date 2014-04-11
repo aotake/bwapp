@@ -1,0 +1,102 @@
+<{**
+ * Admin Group Edit form Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+<div id="pankuzu">
+<a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/">TOP</a> &gt;
+<{if $path}><{*---- グループパス ---- *}>
+<{foreach from=$path item=item}>
+<{if $item->get("is_current")}>
+<{$item->get("name")}> : 編集
+<{else}>
+<a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/index/?parent_id=<{$item->get("id")}>"><{$item->get("name")}></a> &gt;
+<{/if}>
+<{/foreach}>
+<{/if}>
+<{*---- /グループパス ---- *}>
+</div>
+
+<div class="contentTtl"><h2>編集</h2></div>
+<form name="newForm" action="<{$action_name}>" method="post">
+<table class="adminTable">
+<tr>
+    <th class="top">親グループ</th>
+    <td class="rtop">
+        <{$form.parent_id}>
+    </td>
+</tr>
+<tr>
+    <th>グループ名</th><td class="r"><{$form.name}></td>
+</tr>
+<tr>
+    <th>備考</th><td class="r"><{$form.note}></td>
+</tr>
+<tr>
+    <th>表示順</th><td class="r"><{$form.sort}></td>
+</tr>
+</table>
+<{$form.id}>
+<{$form.uid}>
+<{$form.depth}>
+<{$form.created}>
+<{$form.modified}>
+<{$form.delete_flag}>
+<input type="submit" name="submit" value="登録" />
+</form>
+
+<{*---- グループの階層が 1 以下のときは画像登録をできるようにする ----*}>
+<{*---- TODO: どの階層で画像登録できるかは config に記述する --- *}>
+<{*---- MEMO: 以下使用しない
+<{if $category->get("depth") >= 0}>
+<div class="contentTtl" style="margin-top: 20px;"><h2>このグループの画像</h2></div>
+<{if $images}>
+<{foreach from=$images item=item}>
+<{if $item->get("thumb")}>
+<div class="image-item" style="width:240px; margin: 2px; float: left;">
+<div class="image-thumb" style="width: 240px; height:240px;"><img src="<{$siteconf.root_url}>/<{$sysconf.module}>/readimage/thumb/?image_id=<{$item->get("id")}>" /></div>
+<div>[<a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/image-edit/?id=<{$item->get("id")}>" onclick="alert('開発途中です'); return false;">編集</a>][<a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/image-delete/?id=<{$item->get("id")}>">削除</a>]</div>
+</div>
+<{/if}>
+<{/foreach}>
+<div style="clear: both;"></div>
+<{/if}>
+<form method="post" name="form2" action="<{$img_action}>" enctype="multipart/form-data">
+<input type="hidden" name="target" value="<{$target}>" />
+<input type="hidden" name="target_id" value="<{$target_id}>" />
+
+<table class="adminTable">
+<tr>
+<th class="head">画像ファイル</th>
+<td>
+    <input type="file" name="userdata[]" value="" />
+    <input type="submit" name="submit" value="画像登録" />
+</td>
+</tr>
+</table>
+</form>
+
+<{/if}>
+
+使用しない：ここまで*}>

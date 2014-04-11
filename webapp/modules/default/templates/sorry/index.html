@@ -1,0 +1,67 @@
+<{**
+ * Default Sorry Template
+ *                                                                                                      
+ * Smarty3                                                                                              
+ *                                                                                                      
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)                       
+ *                                                                                                      
+ *  Licensed under The MIT License                                                                      
+ *  Redistributions of files must retain the above copyright notice.                                    
+ *                                                                                                      
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)        
+ * @link          http://bmath.jp Bmath Web Application Platform Project                                
+ * @package       Ao.modules.default.templates                                                          
+ * @since                                                                                               
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html                      
+ *}>                                                                                                    
+<style type="text/css">
+dl.exception dt{
+    clear: left;
+    float: left;
+    margin: 0 0 5px;
+    width: 7.5em;
+    border-left: solid 8px #faa;
+    border-bottom: solid 1px #faa;
+    padding-left: 5px;
+    color: #000;
+}
+dl.exception dd {
+    margin-bottom: 5px;
+    margin-left: 8.5em;
+    padding: 0 0 0 10px;
+    border-left: solid 1px #faa;
+}
+div#exception_debug{
+    padding: 10px;
+}
+h2#exception {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-left: 20px solid #aa0000;
+    border-bottom: 1px solid #aa0000;
+    background-color: #fdd;
+}
+h3.exception {
+    border-bottom: 1px solid #aa0000;
+}
+div#exception_message {
+    text-align: center;
+    padding: 50px 20px;
+    font-weight: bold;
+    margin: 0 10px 20px 10px;
+    color: #f00;
+    font-size: 120%;
+    border: 1px solid #f66;
+}
+#sideL {
+    width: 100%;
+}
+#sideR {
+    width: 0;
+}
+</style>
+
+<h2 id="exception">Error</h2>
+<div id="exception_message">
+    <{$content|default:"アクセス権限がありません"|escape:"html"}>
+</div>

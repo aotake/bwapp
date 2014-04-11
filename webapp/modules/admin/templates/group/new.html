@@ -1,0 +1,53 @@
+<{**
+ * Admin Group New Regist form Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+<div class="contentTtl"><h2>新規グループ登録</h2></div>
+
+登録するグループ情報を記入して下さい。
+<form name="newForm" action="<{$action_name}>" method="post">
+<table class="adminTable">
+<tr>
+    <th class="top">親グループ</th>
+    <td class="rtop"><{$form.parent_id}></td>
+</tr>
+<tr>
+    <th>グループ名</th>
+    <td class="r"><{$form.name}></td>
+</tr>
+<tr>
+    <th>備考</th>
+    <td class="r"><{$form.note}></td>
+</tr>
+<tr>
+    <th>表示順</th>
+    <td class="r"><{$form.sort}></td>
+</tr>
+</table>
+<{$form.id}>
+<{$form.uid}>
+<{$form.depth}>
+<input type="submit" name="submit" value="登録" />
+</form>

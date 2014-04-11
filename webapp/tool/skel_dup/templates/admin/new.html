@@ -1,0 +1,36 @@
+<div class="contentTtl"><h2>新規投稿</h2></div>
+
+<form name="newForm" action="<{$action_name}>" method="post">
+<table class="adminTable">
+<{--foreach from=$tableInfo item=item--}>
+<{--if $item.COLUMN_NAME == "id" || $item.COLUMN_NAME|substr:-3 == "_id" || $item.COLUMN_NAME == "uid"--}>
+<{--elseif $item.COLUMN_NAME == "pub_date" && $item.DATA_TYPE == "int"--}>
+<tr>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <td>
+        <{$form.pub_date_y}>年<{$form.pub_date_m}>月<{$form.pub_date_d}>日
+        <{$form.pub_date_h}>時<{$form.pub_date_i}>分
+    </td>
+</tr>
+<{--elseif $item.COLUMN_NAME != "created" && $item.COLUMN_NAME != "modified" && $item.COLUMN_NAME != "delete_flag"--}>
+<tr>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <td>
+        <{$form.<{--$item.COLUMN_NAME--}>}>
+        <{if $error.<{--$item.COLUMN_NAME--}>}>
+            <{foreach $error.<{--$item.COLUMN_NAME--}> item=msg}>
+            <div class="form_error"><{$msg}></div>
+            <{/foreach}>                     
+        <{/if}>
+    </td>
+</tr>
+<{--/if--}>
+<{--/foreach--}>
+</table>
+<{--foreach from=$tableInfo item=item--}>
+<{--if $item.COLUMN_NAME == "id" || $item.COLUMN_NAME|substr:-3 == "_id" || $item.COLUMN_NAME == "uid"--}>
+<{$form.<{--$item.COLUMN_NAME--}>}>
+<{--/if--}>
+<{--/foreach--}>
+<input type="submit" name="submit" value="登録" />
+</form>

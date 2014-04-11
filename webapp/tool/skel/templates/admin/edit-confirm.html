@@ -1,0 +1,25 @@
+<div class="contentTtl"><h2><{$sysconf.module}> - 編集</h2></div>
+
+<form name="editForm" action="<{$action_name}>" method="post">
+<table class="adminTable">
+<{--foreach from=$tableInfo item=item--}>
+<{--if $item.COLUMN_NAME != "id" && ($item.COLUMN_NAME|substr:-3 != "_id" || ($item.COLUMN_NAME|substr:-3 == "_id" && $item.FORM != "" && $item.FORM != "hidden")) && $item.COLUMN_NAME != "uid"--}>
+<tr>
+    <th><{--if $item.LABEL--}><{--$item.LABEL--}><{--else--}><{--$item.COLUMN_NAME--}><{--/if--}></th>
+    <td>
+<{--if $item.COLUMN_NAME|substr:-5 == "_date" && $item.DATA_TYPE == "int"--}>
+        <{$params.<{--$item.COLUMN_NAME--}>|date_format:"%Y年%m月%d日"}>
+<{--else--}>
+        <{$params.<{--$item.COLUMN_NAME--}>}>
+<{--/if--}>
+    </td>
+</tr>
+<{--/if--}>
+<{--/foreach--}>
+</table>
+<{--foreach from=$tableInfo item=item--}>
+<{$form.<{--$item.COLUMN_NAME--}>}>
+<{--/foreach--}>
+<input type="submit" name="submit" value="戻る" />
+<input type="submit" name="submit" value="登録" />
+</form>

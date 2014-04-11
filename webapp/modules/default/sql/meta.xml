@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<meta>
+<meta_memo>
+<![CDATA[
+デフォルトモジュール
+説明：
+■ モジュールの説明
+大半のサイトではこのモジュールをコピーして独自デフォルトモジュールとして使う。
+]]>
+</meta_memo>
+<module>
+    <type>system</type>
+    <name>default</name>
+</module>
+<table>
+    <name>user</name>
+    <note>ユーザ管理</note>
+    <def><![CDATA[
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+# colname                 | data type    |is null | key    | default| extra        | label
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+uid,                       int,           not null, primary,        ,auto_increment, 主キー
+name,                      varchar(255),  not null,        ,        ,              , お名前
+login,                     varchar(255),          ,        ,        ,              , ログインID
+passwd,                    varchar(32),   not null,        ,        ,              , ログインパスワード
+email,                     varchar(255),          ,        ,        ,              , メールアドレス
+note,                      text,                  ,        ,        ,              , 備考
+created,                   timestamp,             ,        ,        ,              , 登録日
+modified,                  timestamp,             ,        ,        ,              , 最終更新日
+delete_flag,               int,                   ,        ,        ,              , 削除フラグ
+]]>
+    </def>
+    <memo><![CDATA[
+login は config で email_login = true のときメールアドレスを入れる。
+]]>
+    </memo>
+    <init_data>
+        <cols>name,login,email,passwd</cols>
+        <data>'管理者', 'admin','admin@mydomain.com', 'c21f969b5f03d33d43e04f8f136e7682'</data>
+        <data>'スタッフ', 'staff','staff@mydomain.com', 'c21f969b5f03d33d43e04f8f136e7682'</data>
+    </init_data>
+</table>
+<table>
+    <name>role</name>
+    <note>権限管理</note>
+    <def><![CDATA[
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+# colname                 | data type    |is null | key    | default| extra        | label
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+rid,                       int,           not null, primary,        ,auto_increment, 主キー
+gid,                       int,                   ,        ,       0,              , グループID
+name,                      varchar(24),   not null,        ,        ,              , 権限名
+note,                      varchar(100),  not null,        ,        ,              , 権限名ラベル
+created,                   timestamp,             ,        ,        ,              , 登録日
+modified,                  timestamp,             ,        ,        ,              , 最終更新日
+delete_flag,               int,                   ,        ,        ,              , 削除フラグ
+]]>
+    </def>
+    <memo><![CDATA[
+現在は created, modified, delete_flag は存在しない
+gid = 0 はサイト全体に関するロール、 gid > 0 はモジュール毎のロールとする。
+]]>
+    </memo>
+    <init_data>
+        <cols>rid, gid,  name,    note</cols>
+        <data>1,     0, 'admin',  '管理者ロール'</data>
+        <data>2,     0, 'member', 'メンバーロール'</data>
+    </init_data>
+</table>
+<table>
+    <name>user_role</name>
+    <note>ユーザ-権限管理</note>
+    <def><![CDATA[
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+# colname                 | data type    |is null | key    | default| extra        | label
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+urid,                      int,           not null, primary,        ,auto_increment, 主キー
+uid,                       int,           not null,        ,        ,              , ユーザID
+rid,                       int,           not null,        ,        ,              , 権限ID
+created,                   timestamp,             ,        ,        ,              , 登録日
+modified,                  timestamp,             ,        ,        ,              , 最終更新日
+delete_flag,               int,                   ,        ,        ,              , 削除フラグ
+]]>
+    </def>
+    <memo><![CDATA[
+現在は created, modified, delete_flag は存在しない。
+UNIQUE(uid,rid)
+]]>
+    </memo>
+    <init_data>
+        <cols>rid, uid</cols>
+        <data>1,   1</data>
+        <data>2,   1</data>
+        <data>2,   2</data>
+    </init_data>
+</table>
+<table>
+    <name>group</name>
+    <note>グループ管理</note>
+    <def><![CDATA[
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+# colname                 | data type    |is null | key    | default| extra        | label
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+id,                        int,           not null, primary,        ,auto_increment, 主キー
+uid,                       int,           not null,        ,        ,              , ユーザID
+parent_id,                 int,           not null,        ,        ,              , 親グループID
+name,                      varchar(255),  not null,        ,        ,              , グループ名
+note,                      text,                  ,        ,        ,              , 備考
+depth,                     tinyint,       not null,        ,       0,              , 階層
+sort,                      tinyint,               ,        ,        ,              , 表示順
+is_last,                   tinyint(1),            ,        ,       0,              , 末端フラグ
+created,                   timestamp,             ,        ,        ,              , 登録日
+modified,                  timestamp,             ,        ,        ,              , 最終更新日
+delete_flag,               int,                   ,        ,        ,              , 削除フラグ
+]]>
+    </def>
+    <memo><![CDATA[
+is_last は、そのカテゴリがツリーの葉に相当するかどうかのフラグ。
+is_last = true のもののみコンテンツを持たせる場合などに使用する。
+depth はそのカテゴリがルートから何階層目かを示す。
+depth はルート直下のトップカテゴリ場合 0 とし、これを基準に階層を深める。
+sort は同一階層時の表示順を示すが、通常使わず id で asc でソートする。
+【特殊な利用】
+parent_id = 0 のモジュール名をグループ名とするグループを作成し権限管理を使う。
+このグループの depth = 1 の階層で当該モジュール内で使うグループ分けをする。
+]]>
+    </memo>
+</table>
+<table>
+    <name>modperm</name>
+    <note>モジュールアクセス権限管理</note>
+    <def><![CDATA[
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+# colname                 | data type    |is null | key    | default| extra        | label
+#-------------------------+--------------+--------+--------+--------+--------------+--------------
+id,                        int,           not null, primary,        ,auto_increment, 主キー
+uid,                       int,           not null,        ,        ,              , ユーザID
+dirname,                   varchar(32),   not null,        ,        ,              , モジュールディレクトリ名
+permission,                int,           not null,        ,       0,              , 権限レベル
+note,                      text,                  ,        ,        ,              , 備考
+created,                   timestamp,             ,        ,        ,              , 登録日
+modified,                  timestamp,             ,        ,        ,              , 最終更新日
+delete_flag,               int,                   ,        ,        ,              , 削除フラグ
+]]>
+    </def>
+    <memo><![CDATA[
+サイトのメンバーのなかで、モジュール的にゲストかメンバーかを判定する。
+permission = 0: guest
+permission = 1: member
+permission = 2: modadmin
+]]>
+    </memo>
+</table>
+<recipe><![CDATA[
+]]>
+</recipe>
+</meta>

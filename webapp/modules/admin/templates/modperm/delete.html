@@ -1,0 +1,82 @@
+<{**
+ * Admin Modperm delete confirm Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+
+<div class="contentTtl"><h2><{$module}></h2></div>
+<div id="warning">
+    こちらの情報を削除しようとしています
+</div>
+
+<h3 class="moduleSubtitle"><span style="color: red;">削除確認</span></h3>
+<div class="moduleContent"}>
+
+<table class="adminTable">
+<tr>
+    <th>主キー</th>
+    <td><{$item->get("id")}></td>
+</tr>
+<tr>
+    <th>ユーザID</th>
+    <td><{$item->get("uid")}></td>
+</tr>
+<tr>
+    <th>モジュールディレクトリ名</th>
+    <td><{$item->get("dirname")}></td>
+</tr>
+<tr>
+    <th>権限レベル</th>
+    <td><{$item->get("permission")}></td>
+</tr>
+<tr>
+    <th>備考</th>
+    <td><{$item->get("note")}></td>
+</tr>
+<tr>
+    <th>登録日</th>
+    <td><{$item->get("created")}></td>
+</tr>
+<tr>
+    <th>最終更新日</th>
+    <td><{$item->get("modified")}></td>
+</tr>
+<tr>
+    <th>削除フラグ</th>
+    <td><{$item->get("delete_flag")}></td>
+</tr>
+</table>
+
+</div>
+<div class="moduleInfo">
+    作成日：<{$item->get("created")|date_format:"%Y年%m月%d日"}>
+    更新日：<{$item->get("modified")|date_format:"%Y年%m月%d日"}>
+</div>
+
+
+<form name="deleteForm" id="deleteForm" action="<{$action_name}>" method="post" onSubmit="return confirm('本当に削除しますか？');">
+    <input type="hidden" name="id" value="<{$smarty.request.id}>" />
+    <input type="submit" name="submit" value="この情報を削除する" />
+</form>
+

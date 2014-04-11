@@ -1,0 +1,123 @@
+<{**
+ * Admin Error Template
+ *
+ * Smarty3
+ *
+ * Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @copyright     Copyright 2011-2012, Bmath Web Application Platform Project. (http://bmath.jp)
+ * @link          http://bmath.jp Bmath Web Application Platform Project
+ * @package       Ao.modules.admin.templates
+ * @since
+ * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ *}>
+<style type="text/css">
+dl.exception dt{
+    clear: left;
+    float: left;
+    margin: 0 0 5px;
+    width: 7.5em;
+    border-left: solid 8px #faa;
+    border-bottom: solid 1px #faa;
+    padding-left: 5px;
+    color: #000;
+}
+dl.exception dd {
+    margin-bottom: 5px;
+    margin-left: 8.5em;
+    padding: 0 0 0 10px;
+    border-left: solid 1px #faa;
+}
+div#exception_debug{
+    padding: 10px;
+}
+h2#exception {
+    border-left: 20px solid #aa0000;
+    border-bottom: 1px solid #aa0000;
+    background-color: #fdd;
+}
+h3.exception {
+    border-bottom: 1px solid #aa0000;
+}
+div#exception_message {
+    text-align: center;
+    padding: 50px 20px;
+    font-weight: bold;
+    margin: 0 10px 20px 10px;
+    color: #f00;
+    font-size: 120%;
+    border: 1px solid #f66;
+}
+</style>
+
+<h2 id="exception">Error</h2>
+<div id="exception_message"><{$content|escape:"html"}></div>
+
+
+<{if $siteconf.debug}>
+<div id="exception_debug">
+<h3 class="exception">Deug Information</h3>
+<dl class="exception">
+    <dt>file</dt><dd><{$file}></dd>
+    <dt>line</dt><dd><{$line}></dd>
+    <dt>code</dt><dd><{$code}></dd>
+    <dt>message</dt><dd><strong><{$message}></strong></dd>
+    <dt>toString</dt><dd><{$tostring}></dd>
+    <dt>trace_str</dt><dd><{$trace_str}></dd>
+</dl>
+<h3 class="exception">Deug Information2</h3>
+<dl class="exception">
+    <dt>_SESSION</dt><dd><{$_session|escape:"html"|nl2br}></dd>
+    <dt>_REQUEST</dt><dd><{$_request|escape:"html"|nl2br}></dd>
+    <dt>_POST</dt><dd><{$_post|escape:"html"|nl2br}></dd>
+    <dt>_GET</dt><dd><{$_get|escape:"html"|nl2br}></dd>
+    <dt>_COOKIE</dt><dd><{$_cookie|escape:"html"|nl2br}></dd>
+    <dt>_FILES</dt><dd><{$_files|escape:"html"|nl2br}></dd>
+    <dt>_SERVER</dt><dd><{$_server|escape:"html"|nl2br}></dd>
+</dl>
+
+<h3 class="exception">Trace</h3>
+<{foreach from=$trace item=item key=i}>
+<h4><{$i}></h4>
+<dl class="exception">
+    <dt>file</dt><dd><{$item.file}></dd>
+    <dt>line</dt><dd><{$item.line}></dd>
+    <dt>func</dt>
+        <dd>
+            <{if $item.type}>
+            <{$item.class}><{$item.type}><{$item.function}>()
+            <{else}>
+            <{$item.function}>()
+            <{/if}>
+        </dd>
+    <dt>func arg</dt>
+        <dd>
+            <{foreach from=$item.args item=arg key=n}>
+                <{$n}>:
+                <{if $arg|is_string}>
+                    <{$arg}>
+                <{else}>
+                    <{$arg|get_class}> Object
+                <{/if}>
+                &nbsp;
+            <{foreachelse}>
+            None
+            <{/foreach}>
+        </dd>
+</dl>
+<{/foreach}>
+</div><{*-- id=exception_message -- *}>
+<{/if}><{*-- if $siteconf.debug == true-- *}>
