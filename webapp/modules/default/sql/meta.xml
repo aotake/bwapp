@@ -36,8 +36,8 @@ login は config で email_login = true のときメールアドレスを入れ�
     </memo>
     <init_data>
         <cols>name,login,email,passwd</cols>
-        <data>'管理者', 'admin','admin@mydomain.com', 'c21f969b5f03d33d43e04f8f136e7682'</data>
-        <data>'スタッフ', 'staff','staff@mydomain.com', 'c21f969b5f03d33d43e04f8f136e7682'</data>
+        <data>'Site Admin', 'admin','admin@example.com', 'c21f969b5f03d33d43e04f8f136e7682'</data>
+        <data>'Site Staff', 'staff','staff@example.com', 'c21f969b5f03d33d43e04f8f136e7682'</data>
     </init_data>
 </table>
 <table>
@@ -63,8 +63,8 @@ gid = 0 はサイト全体に関するロール、 gid > 0 はモジュール毎
     </memo>
     <init_data>
         <cols>rid, gid,  name,    note</cols>
-        <data>1,     0, 'admin',  '管理者ロール'</data>
-        <data>2,     0, 'member', 'メンバーロール'</data>
+        <data>1,     0, 'admin',  'Site Admin Role'</data>
+        <data>2,     0, 'member', 'Site Member Role'</data>
     </init_data>
 </table>
 <table>
