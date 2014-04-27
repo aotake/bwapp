@@ -56,7 +56,7 @@ class Form_Validator_Role_New extends Ao_Util_Validator
         //    $error['passwd']['length']             = $this->postStrlenMinMax('address', 6, 32);
         //}
     
-        $error["rid"]["integer"] = (false == $this->postIsInteger("rid")) ? "整数値で入力して下さい" : null;
+        $error["rid"]["integer"] = (null !== $this->postIsInteger("rid")) ? "整数値で入力して下さい" : null;
 
         $error["rid"]["registed"] = $this->isRegistedRid();
         $error["name"]["registed"] = $this->isRegistedName();
