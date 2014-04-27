@@ -25,11 +25,12 @@
  * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  *}>
 
-<div id="sideL">
 <h2>ロール一覧 </h2>
 
+<p><a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/new/">新規登録</a></p>
+
 <{if $roles}>
-<table class="adminTable">
+<table class="table table-striped">
 <tr>
     <th class="top">rid</th>
     <th class="top">name</th>
@@ -40,9 +41,9 @@
     <td><{$item->get("rid")}></td>
     <td><{$item->get("name")}></td>
     <td class="r">
-        <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/edit/rid/<{$item->get("rid")}>">編集</a>
-        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/delete/rid/<{$item->get("rid")}>">削除</a>
-        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/belong-user/rid/<{$item->get("rid")}>">所属ユーザ</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/edit/rid/<{$item->get("rid")}>">編集</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/delete/rid/<{$item->get("rid")}>">削除</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/belong-user/rid/<{$item->get("rid")}>">所属ユーザ</a>
     </td>
 </tr>
 <{/foreach}>
@@ -52,13 +53,3 @@
 登録されたロールはありません
 <{/if}>
 
-</div>
-
-<div id="sideR">
-
-    <h2>ロール</h2>
-    <ul id="sidenav">
-    <li><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/role/new/">新規登録</a></li>
-    </ul>
-
-</div>

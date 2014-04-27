@@ -29,22 +29,28 @@
 <{if $sys_message}>
 <div class="error"><{$sys_message}></div>
 <{/if}>
-<dl>
-    <dt>ロールID</dt>
-    <dd>
+<table class="table table-striped">
+<tr>
+    <th>ロールID</th>
+    <td>
         <{$params.rid}>
-    </dd>
-
-    <dt>ロール名</dt>
-    <dd>
+    </td>
+</tr>
+<tr>
+    <th>ロール名</th>
+    <td>
         <{$params.name}>
-    </dd>
-
-    <dt>備考</dt>
-    <dd><{$params.note|escape:"html"|nl2br}></dd>
-
-</dl>
+    </td>
+</tr>
+<tr>
+    <th>備考</th>
+    <td><{$params.note|escape:"html"|nl2br}></td>
+</tr>
+</table>
 <form name="newForm" action="<{$action_name}>" method="post" onSubmit="return confirm('本当に削除しますか？');">
 <input type="hidden" name="rid" value="<{$rid}>" />
-<input type="submit" name="submit" value="削除" />
+<input class="btn btn-default" type="button" name="button" value="戻る" onclick="location.href='<{$siteconf.root_url}>/admin/role/'"/>
+&nbsp;
+&nbsp;
+<input class="btn btn-default" type="submit" name="submit" value="削除" />
 </form>

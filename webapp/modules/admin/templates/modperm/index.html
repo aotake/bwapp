@@ -28,7 +28,7 @@
 <div class="contentTtl"><h2>一覧</h2></div>
 
 <div style="text-align: right">
-    <li><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/new/">新規記事を投稿</a></li>
+    <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/new/">新規登録</a>
 </div>
 
 <div class="pager"><{$pagenav}></div>
@@ -40,16 +40,18 @@
     </form>
 </div>
 
-<table class="adminTable">
+<table class="table table-striped">
 <tr>
         <th class="top">主キー</th>
         <th class="top">ユーザID</th>
         <th class="top">モジュールディレクトリ名</th>
         <th class="top">権限レベル</th>
+        <{***
         <th class="top">備考</th>
         <th class="top">登録日</th>
         <th class="top">最終更新日</th>
         <th class="top">削除フラグ</th>
+        ***}>
         <th class="rtop">操作</th>
 </tr>
 <{foreach from=$items item=item}>
@@ -58,14 +60,16 @@
         <td><{$item->get("uid")}></td>
         <td><{$item->get("dirname")}></td>
         <td><{$item->get("permission")}></td>
+        <{***
         <td><{$item->get("note")}></td>
         <td><{$item->get("created")}></td>
         <td><{$item->get("modified")}></td>
         <td><{$item->get("delete_flag")}></td>
+        ****}>
         <td class="r">
-        <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/detail/?id=<{$item->get("id")}>" target="_blank">表示</a>
-        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/edit/?id=<{$item->get("id")}>">編集</a>
-        | <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/delete/?id=<{$item->get("id")}>">削除</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/detail/?id=<{$item->get("id")}>" target="_blank">表示</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/edit/?id=<{$item->get("id")}>">編集</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/<{$sysconf.controller}>/delete/?id=<{$item->get("id")}>">削除</a>
     </td>
 </tr>
 <{/foreach}>

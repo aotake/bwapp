@@ -30,26 +30,29 @@
 <div class="error"><{$sys_message}></div>
 <{/if}>
 <form name="newForm" action="<{$action_name}>" method="post">
-<dl>
-    <dt>ロールID</dt>
-    <dd>
+<table class="table table-striped">
+<tr>
+    <th>ロールID</th>
+    <td>
         <{$form.rid}>
         <{if $error.rid.required}><div class="error">必須項目です</div><{/if}>
         <{if $error.rid.integer}><div class="error">半角数字で入力して下さい</div><{/if}>
         <{if $error.rid.registed}><div class="error">登録済みIDです</div><{/if}>
-    </dd>
-
-    <dt>ロール名</dt>
-    <dd>
+    </td>
+</tr>
+<tr>
+    <th>ロール名</th>
+    <td>
         <{$form.name}>
         <{if $error.name.required}><div class="error">必須項目です</div><{/if}>
         <{if $error.name.registed}><div class="error">登録済みロール名です</div><{/if}>
-    </dd>
-
-    <dt>備考</dt>
-    <dd><{$form.note}></dd>
-
-</dl>
+    </td>
+</tr>
+<tr>
+    <th>備考</th>
+    <td><{$form.note}></td>
+</tr>
+</table>
 <{$form.rid_orig}>
-<input type="submit" name="submit" value="登録" />
+<input class="btn btn-default" type="submit" name="submit" value="登録" />
 </form>

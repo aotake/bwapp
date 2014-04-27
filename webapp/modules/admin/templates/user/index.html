@@ -24,12 +24,19 @@
  * @since
  * @license       GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  *}>
-<div id="sideL">
 <h2>ユーザ一覧 </h2>
+
+<div style="text-align: right;"><a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/user/new/">新規登録</a></div>
+<div id="searchBox">
+    <form name="searchForm" id="searchForm" action="<{$action_name}>" method="get">
+    <input type="text" id="kw" name="kw" value="<{$kw}>" />
+    <input type="submit" name="submit" id="submit" class="btn btn-default" value="検索" />
+    </form>
+</div>
 
 <{if $users}>
 <div class="pager"><{$pagenav}></div> 
-<table class="adminTable">
+<table class="table table-striped">
 <tr>
     <th class="top">uid</th>
     <th class="top">name</th>
@@ -41,8 +48,10 @@
     <td><{$item->get("uid")}></td>
     <td><{$item->get("name")}></td>
     <td><{$item->get("login")}></td>
-    <td class="r"><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/user/edit/uid/<{$item->get("uid")}>">編集</a>
-    <a href="<{$siteconf.root_url}>/<{$sysconf.module}>/user/delete/uid/<{$item->get("uid")}>">削除</a></td>
+    <td class="r">
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/user/edit/uid/<{$item->get("uid")}>">編集</a>
+        <a class="btn btn-default" href="<{$siteconf.root_url}>/<{$sysconf.module}>/user/delete/uid/<{$item->get("uid")}>">削除</a>
+    </td>
 </tr>
 <{/foreach}>
 </table>
@@ -52,20 +61,3 @@
 登録されたユーザはいません
 <{/if}>
 
-</div>
-
-<div id="sideR">
-
-    <h2>ユーザ</h2>
-    <ul id="sidenav">
-    <li><a href="<{$siteconf.root_url}>/<{$sysconf.module}>/user/new/">新規登録</a></li>
-    </ul>
-
-    <div id="searchBox">
-        <form name="searchForm" id="searchForm" action="<{$action_name}>" method="get">
-        <input type="text" id="kw" name="kw" value="<{$kw}>" />
-        <input type="submit" name="submit" id="submit" value="検索" />
-        </form>
-    </div>
-
-</div>

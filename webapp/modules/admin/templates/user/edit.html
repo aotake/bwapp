@@ -31,48 +31,54 @@
 <div class="error"><{$sys_message}></div>
 <{/if}>
 <form name="newForm" action="<{$action_name}>" method="post">
-<dl class="list">
-    <dt>ユーザ名</dt>
-    <dd>
+<table class="table table-striped">
+<tr>
+    <th>ユーザ名</th>
+    <td>
         <{$form.name}>
         <{if $error.name.required}><div class="error">必須項目です</div><{/if}>
-    </dd>
+    </td>
+</tr>
 <{if !$sysconf.email_login}>
-    <dt>ログイン名</dt>
-    <dd>
+<tr>
+    <th>ログイン名</th>
+    <td>
         <{$form.login}>
         <{if $error.login.required}><div class="error">必須項目です</div><{/if}>
         <{if $error.login.registed}><div class="error">利用できません</div><{/if}>
         <{if $error.login.length}><div class="error"><{$error.login.length}></div><{/if}>
-    </dd>
+    </td>
+</tr>
 <{/if}>
-
-    <dt>メールアドレス</dt>
-    <dd>
+<tr>
+    <th>メールアドレス</th>
+    <td>
         <{$form.email}>
         <{if $error.email.required}><div class="error">必須項目です</div><{/if}>
         <{if $error.email.format}><div class="error">書式が不正です</div><{/if}>
-    </dd>
-
-    <dt>パスワード</dt>
-    <dd>
+    </td>
+</tr>
+<tr>
+    <th>パスワード</th>
+    <td>
         <{$form.passwd}>
         <div>※変更の場合のみ記入して下さい</div>
         <{if $error.passwd.required}><div class="error">必須項目です</div><{/if}>
         <{if $error.passwd.length}><div class="error"><{$error.passwd.length}></div><{/if}>
         <{if $error.passwd.format}><div class="error"><{$error.passwd.format}></div><{/if}>
         <{if $error.login.registed}><div class="error">利用できません</div><{/if}>
-    </dd>
-
-    <dt>備考</dt>
-    <dd><{$form.note}></dd>
-
-</dl>
+    </td>
+</tr>
+<tr>
+    <th>備考</th>
+    <td><{$form.note}></td>
+</tr>
+</table>
 <{$form.uid}>
 <{if $sysconf.email_login}>
 <input type="hidden" name="login" value="<{$params.email}>" />
 <{/if}>
-<input type="submit" name="submit" value="登録" />
+<input class="btn btn-default" type="submit" name="submit" value="登録" />
 </form>
 
 </div><!-- /sideL-->
@@ -95,7 +101,7 @@
 
 <h2>モジュール権限</h2>
 <form name="modpermForm" id="modpermForm" method="post" action="<{$modperm_action}>">
-<table class="adminTable">
+<table class="table table-striped">
 <tr>
     <th class="top">モジュール名</th>
     <th class="rtop">権限</th>
