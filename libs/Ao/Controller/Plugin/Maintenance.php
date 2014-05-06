@@ -65,6 +65,18 @@ class Ao_Controller_Plugin_Maintenance extends Zend_Controller_Plugin_Abstract
             && isset($this->_config->site->maintenance->mode)
         ){
             $maintenance_mode = $this->_config->site->maintenance->mode;
+
+            $maintenance_start = isset($this->_config->site->maintenance->start) ? $this->_config->site->maintenance->start : null;
+            $maintenance_end   = isset($this->_config->site->maintenance->end) ? $this->_config->site->maintenance->end : null;
+
+            // 開始時刻が指定されていて、開始時刻前ならメンテナンスモードを OFF にする
+            if( $maintenance_mode == true && $maintenance_start != "" && time() < strtotime($maintenance_start) ) {
+                $maintenance_mode = false;
+            }
+            // 終了時刻が指定されていて、終了時刻を過ぎていたらメンテナンスモードを OFF にする
+            if( $maintenance_mode == true && $maintenance_end != "" && time() > strtotime($maintenance_end) ) {
+                $maintenance_mode = false;
+            }
         }
 
         // モジュールメンテナンスモード
@@ -125,9 +137,15 @@ class Ao_Controller_Plugin_Maintenance extends Zend_Controller_Plugin_Abstract
                 !($is_allow_user || $is_admin)  // 許可されたユーザでも管理者でもない
             ){
                 $this->getResponse()->clearBody();
+                $this->getResponse()->setRawHeader('HTTP/1.1 503 Service Temporarily Unavailable');
                 $request->setModuleName('default');
                 $request->setControllerName('maintenance');
-                $request->setActionName('index');
+                Zend_Registry::get("logger")->debug(__METHOD__.",".__LINE__.",----> Maintenance View");
+                if( $c == "maintenance" ){
+                    $request->setActionName($a);
+                } else {
+                    $request->setActionName('index');
+                }
             }
         }
     }
