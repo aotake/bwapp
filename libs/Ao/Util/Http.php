@@ -10,7 +10,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -45,5 +45,57 @@ class Ao_Util_Http
         $html = curl_exec($ch);
         curl_close($ch);
         Zend_Registry::get("logger")->debug(__METHOD__.": access by curl ->".$url);
+    }
+    static public function post($url, $params, $referer_url = null, $basic_auth_id = null, $basic_auth_pw = null)
+    {
+        $cookie_file = dirname(__FILE__)."/cookie.txt";
+        $error_file  = dirname(__FILE__)."/error";
+
+        $param = "";
+        foreach($params as $key => $val){
+            $param .= "&".$key."=".$val;
+        }
+
+        if(file_exists($cookie_file)){
+            $fp = fopen($cookie_file, "a");
+        } else {
+            $fp = fopen($cookie_file, "w");
+        }
+        $err_fp = fopen($error_file, "w");
+
+        $ch = curl_init($url);
+
+        // リダイレクト先があれば飛ぶ（これないとまたログイン画面に戻る）
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, "cookie");
+        curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
+        curl_setopt($ch, CURLOPT_WRITEHEADER, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_FAILONERROR, TRUE);
+        //curl_setopt($ch, CURLOPT_USERAGENT, self::USERAGENT);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_STDERR, $err_fp);
+        if( $referer_url ){
+            curl_setopt($ch, CURLOPT_REFERER, $referer_url);
+        }
+
+        // サイトへアクセス
+        $result = curl_exec($ch);
+
+        // HTTPステータスコードをチェックしエラーならエラー内容を出力
+        if(curl_errno($ch)) {
+            echo 'Curl error: ' . curl_error($ch);
+        }
+
+        // セッションをクローズ
+        curl_close($ch);
+        fclose($fp);
+        fclose($err_fp);
+
+        // リクエストの内容を出力
+        return preg_replace("/<br \/>\n/", "\n", htmlspecialchars_decode($result));
     }
 }
