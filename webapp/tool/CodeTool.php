@@ -184,6 +184,7 @@ class CodeTool {
             $writer = new Zend_Log_Writer_Stream($log_path);
             $logger->addWriter($writer);
             $this->registry["logger"] = $logger;
+            $this->registry["query_log"] = array("start mypid" => getmypid(), "log" => array());
         }
     }
     public function setupModulePath()
