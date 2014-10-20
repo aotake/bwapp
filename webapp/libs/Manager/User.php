@@ -222,6 +222,44 @@ class Manager_User extends Manager
     }
 
     /**
+     * getUsersByRoleName
+     *
+     * 指定ロールをもつユーザの取得
+     *
+     * @return Array of UserVo
+     */
+    public function getUsersByRoleName($role_name)
+    {
+        if($this->_controller == null){
+            throw new Zend_Exception("User Manager Error: no controller");
+        }
+        $req = $this->_controller->getRequest();
+        $model    = new Model_User();
+        $model_ur = new Model_UserRole();
+        $model_r  = new Model_Role();
+        $select = $model->select();
+        $select->setIntegrityCheck(false)
+            ->from(array("u" => $model->name()), array("*"))
+            ->joinLeft(
+                array("ur" => $model_ur->name()),
+                "u.uid = ur.uid",
+                array(""))
+            ->joinLeft(
+                array("r" => $model_r->name()),
+                "r.rid = ur.rid",
+                array(""))
+            ->where("r.name = ?", $role_name)
+            ->order("u.uid asc")
+            ;
+        $res = $model->fetchAll($select, true);
+        if($res){
+            return $this->_assignCommonVos($res);
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * getCelebUsers
      *
      * 著名人ユーザの取得
