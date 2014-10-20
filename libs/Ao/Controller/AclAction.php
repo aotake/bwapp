@@ -67,9 +67,27 @@ class Ao_Controller_AclAction extends Ao_Controller_Action
         $acl = new Zend_Acl();
         //$acl->add(new Zend_Acl_Resource("index"));
 
-        $acl->addRole(new Zend_Acl_Role("guest"));
-        $acl->addRole(new Zend_Acl_Role("member"), "guest");
-        $acl->addRole(new Zend_Acl_Role("admin"), "member");
+        $roles = array();
+        if( $registry["config"]->acl->role ){
+            $role_config = $registry["config"]->acl->role->toArray();
+            foreach( $role_config as $role_name => $rconf ){
+                if( $rconf && $rconf["inherit"] != ""  ){
+                    //echo "\$acl->addRole(new Zend_Acl_Role( $role_name ), ".$rconf['inherit']." );<br>";
+                    $acl->addRole(new Zend_Acl_Role( $role_name ), $rconf["inherit"] );
+                } else {
+                    //echo "\$acl->addRole(new Zend_Acl_Role( $role_name ));<br>";
+                    $acl->addRole(new Zend_Acl_Role( $role_name ));
+                }
+                $roles[] = $role_name;
+            }
+        }
+        else {
+
+            $acl->addRole(new Zend_Acl_Role("guest"));
+            $acl->addRole(new Zend_Acl_Role("member"), "guest");
+            $acl->addRole(new Zend_Acl_Role("admin"), "member");
+
+        }
 
         /*
          * config.ini で定義いたコントロールデータを取り込む
@@ -80,7 +98,9 @@ class Ao_Controller_AclAction extends Ao_Controller_Action
         $allow_all_mod = array();
         $logger = $registry["logger"];
 
-        $roles = array("guest", "member");
+        if( !$roles ){
+            $roles = array("guest", "member");
+        }
 
         foreach($roles as $_role){
             $_acl_conf = $registry["config"]->acl->toArray();
