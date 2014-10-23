@@ -71,6 +71,40 @@ class Manager_User extends Manager
         }
     }
     /**
+     * getUsers
+     *
+     * ユーザ Vo の配列を返す
+     *
+     * @param $limit 取得件数
+     * @param $offset 取得開始位置
+     * @return Array of UsreVo
+     */
+    public function getUsers($conditions = array(), $order = array("uid desc"))
+    {
+        if( !$conditions ){
+            throw new Zend_Exception("条件が未指定です");
+        }
+        $model = new Model_User();
+        $select = $model->select();
+        if( is_string( $conditions ) ){
+            $conditions = array( $conditions );
+        }
+        foreach( $conditions as $c ){
+            $select->where( $c );
+        }
+        if( $order ){
+            if( is_string($order) ){
+                $order = array( $order );
+            }
+            foreach( $order as $o ){
+                $select->order( $o );
+            }
+        } else {
+            $select->order("uid desc");
+        }
+        return $model->fetchAll($select);
+    }
+    /**
      * gets
      *
      * ユーザ Vo の配列を返す
